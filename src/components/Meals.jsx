@@ -2,12 +2,13 @@ import React from 'react';
 import { useGlobalContext } from '../context.jsx';
 import {FaRegThumbsUp} from 'react-icons/fa';
 const Meals = () => {
-    const {meals, loading} = useGlobalContext();
+    const {meals, loading, selectMeal, addToFavourites, removeFromFavourites} = useGlobalContext();
 
     if (loading){
-        return <section className='section'>
+        return (<section className='section'>
             <h4>Loading...</h4>
         </section>
+        )
     }
     if(meals.length < 1){
         return (
@@ -23,13 +24,14 @@ const Meals = () => {
         {
             meals.map((singleMeal) => {
                 const {idMeal, strMeal: title, strMealThumb: image} = singleMeal;
-                return <article key={idMeal} className='single-meal'>
-                    <img src={image} className='img' />
+                return (<article key={idMeal} className='single-meal'>
+                    <img src={image} className='img' onClick={() => selectMeal(idMeal)} />
                     <footer>
                         <h5>{title}</h5>
-                        <button className='like-btn'><FaRegThumbsUp/></button>
+                        <button onClick={() => addToFavourites(idMeal)} className='like-btn'><FaRegThumbsUp/></button>
                     </footer>
                 </article>
+                )
             })
         }
     </section>

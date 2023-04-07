@@ -1,16 +1,18 @@
 import React from 'react';
 import './App.css';
+import { useGlobalContext } from './context.jsx';
 import Search from './components/Search.jsx';
 import Meals from './components/Meals.jsx';
 import Modal from './components/Modal.jsx';
 import Favorites from './components/Favorites.jsx';
 const App = () => {
+  const {showModal, favourites} = useGlobalContext();
   return (
     <main>
-      {/* <Search /> */}
-      {/* <Favorites /> */}
+      <Search />
+      {favourites.length  > 0 &&  <Favorites />} 
       <Meals />
-      {/* <Modal /> */}
+      {showModal && <Modal />}
     </main>
   )
 }
